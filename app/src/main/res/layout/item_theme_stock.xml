@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingVertical="6dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical">
+
+        <TextView
+            android:id="@+id/tv_stock_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:textColor="@android:color/black"
+            android:textSize="13sp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:layout_marginEnd="8dp"
+            tools:text="삼성전자" />
+
+        <TextView
+            android:id="@+id/tv_stock_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@android:color/white"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:paddingStart="4dp"
+            android:paddingEnd="4dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            tools:background="#33FFFFFF"
+            android:gravity="end"
+            tools:text="+7.25%" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/tv_stock_volume"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="12sp"
+        android:layout_gravity="end"
+        android:layout_marginTop="2dp"
+        android:paddingStart="2dp"
+        android:paddingEnd="2dp"
+        tools:text="1,245억" />
+
+</LinearLayout> 

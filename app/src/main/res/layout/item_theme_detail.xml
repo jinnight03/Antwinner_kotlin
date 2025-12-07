@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="4dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="4dp"
+    app:cardCornerRadius="8dp"
+    app:cardElevation="0dp"
+    app:strokeColor="#E0E0E0"
+    app:strokeWidth="1dp"
+    android:backgroundTint="@android:color/white">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="12dp">
+
+        <!-- Left Section: Icon -->
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/iv_theme_icon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:civ_border_width="0dp"
+            app:layout_constraintStart_toStartOf="@id/layout_theme_text"
+            app:layout_constraintEnd_toEndOf="@id/layout_theme_text"
+            app:layout_constraintTop_toTopOf="parent"
+            
+            tools:src="@drawable/ic_launcher_background" />
+
+        <!-- Left Section: Text Group (Below Icon) -->
+        <LinearLayout
+            android:id="@+id/layout_theme_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_marginTop="4dp" 
+            app:layout_constraintStart_toStartOf="parent" 
+            app:layout_constraintEnd_toStartOf="@+id/layout_companies"
+            app:layout_constraintTop_toBottomOf="@id/iv_theme_icon"> 
+
+            <TextView
+                android:id="@+id/tv_theme_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:textColor="@android:color/black"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                tools:text="아주아주 긴 테마 이름 테스트 (이제 줄바꿈 가능)" />
+
+            <TextView
+                android:id="@+id/tv_theme_average_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="2dp"
+                android:textColor="@color/market_up"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                android:gravity="start"
+                tools:text="+13.33%" />
+
+        </LinearLayout>
+
+        <!-- Right Section: Company List -->
+        <LinearLayout
+            android:id="@+id/layout_companies"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/iv_theme_icon" 
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"> 
+
+            <!-- Company items will be added here dynamically -->
+
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView> 

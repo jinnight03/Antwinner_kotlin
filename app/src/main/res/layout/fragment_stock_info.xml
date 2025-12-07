@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fillViewport="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- 투자자별 거래동향 섹션 -->
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="투자자별 거래동향"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/text_primary"
+            android:layout_marginBottom="12dp" />
+
+        <!-- 스와이프 안내 텍스트 -->
+        <TextView
+            android:id="@+id/swipeInstructionText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="좌우로 스와이프하여 더 많은 정보를 확인하세요"
+            android:textSize="12sp"
+            android:textColor="@color/text_secondary"
+            android:gravity="center"
+            android:layout_marginBottom="16dp" />
+
+        <!-- ViewPager2 with safety measures -->
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/tradingTrendViewPager"
+            android:layout_width="match_parent"
+            android:layout_height="400dp"
+            android:layout_marginBottom="16dp"
+            android:layerType="software" />
+
+        <!-- 페이지 인디케이터 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="8dp">
+
+            <View
+                android:id="@+id/pageIndicator1"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_marginEnd="4dp"
+                android:background="@drawable/bg_positive_value" />
+
+            <View
+                android:id="@+id/pageIndicator2"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_marginEnd="4dp"
+                android:background="@drawable/bg_rounded_light_gray" />
+
+            <View
+                android:id="@+id/pageIndicator3"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:background="@drawable/bg_rounded_light_gray" />
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</ScrollView> 

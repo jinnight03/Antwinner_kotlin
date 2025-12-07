@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="12dp">
+
+    <!-- 종목 순위 -->
+    <TextView
+        android:id="@+id/tv_rank"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:textColor="@color/text_primary"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@id/iv_stock_logo"
+        app:layout_constraintBottom_toBottomOf="@id/iv_stock_logo"
+        tools:text="1." />
+
+    <!-- 종목 로고 -->
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/iv_stock_logo"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="12dp"
+        app:layout_constraintStart_toEndOf="@id/tv_rank"
+        app:layout_constraintTop_toTopOf="parent"
+        app:civ_border_width="1dp"
+        app:civ_border_color="@color/background_light_gray"
+        tools:src="@drawable/sample_logo" />
+
+    <!-- 종목명 -->
+    <TextView
+        android:id="@+id/tv_stock_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="12dp"
+        android:textColor="@color/text_primary"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:padding="4dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?attr/selectableItemBackground"
+        app:layout_constraintStart_toEndOf="@id/iv_stock_logo"
+        app:layout_constraintTop_toTopOf="@id/iv_stock_logo"
+        app:layout_constraintEnd_toStartOf="@id/tv_stock_percent"
+        tools:text="오리엔트정공" />
+
+    <!-- 상승률 -->
+    <TextView
+        android:id="@+id/tv_stock_percent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/rising_color"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/iv_stock_logo"
+        tools:text="925.16%" />
+
+    <!-- 말풍선 배경 -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_news_bubble"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginStart="52dp"
+        app:cardCornerRadius="12dp"
+        app:cardBackgroundColor="@color/card_bubble_background"
+        app:cardElevation="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_stock_name">
+
+        <!-- 날짜와 상승률 정보 -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:padding="12dp">
+
+            <!-- 날짜와 당일 상승률 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                
+                <TextView
+                    android:id="@+id/tv_news_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="12sp"
+                    android:textColor="@color/text_secondary"
+                    tools:text="2025-04-02" />
+
+                <TextView
+                    android:id="@+id/tv_daily_change"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:textSize="12sp"
+                    android:textColor="@color/rising_color"
+                    android:textStyle="bold"
+                    tools:text="▲21.6%" />
+            </LinearLayout>
+
+            <!-- 뉴스 내용 -->
+            <TextView
+                android:id="@+id/tv_news_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:textSize="14sp"
+                android:textColor="@color/text_primary"
+                android:lineSpacingExtra="4dp"
+                tools:text="[이재명] 윤석열 선고일 확정 소식에 대선 후보자 관련주들 폭등" />
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- 구분선 -->
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/divider_color"
+        android:layout_marginTop="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/cv_news_bubble" />
+
+</androidx.constraintlayout.widget.ConstraintLayout> 

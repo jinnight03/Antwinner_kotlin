@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="10dp"
+    android:background="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
+
+    <ImageView
+        android:id="@+id/iv_result_icon"
+        android:layout_width="28dp"
+        android:layout_height="28dp"
+        android:layout_gravity="center_vertical"
+        android:layout_marginEnd="12dp"
+        android:contentDescription="아이콘"
+        android:src="@drawable/ic_launcher_foreground"
+        android:scaleType="centerCrop" />
+
+    <TextView
+        android:id="@+id/tv_result_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/black"
+        android:textSize="15sp"
+        android:singleLine="true"
+        android:ellipsize="end" />
+
+</LinearLayout> 

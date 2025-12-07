@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="12dp"
+    android:background="?attr/selectableItemBackground">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cv_stock_icon"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="0dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+        
+        <ImageView
+            android:id="@+id/iv_stock_icon"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:background="@android:color/darker_gray" />
+    </androidx.cardview.widget.CardView>
+
+    <TextView
+        android:id="@+id/tv_stock_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="8dp"
+        android:textSize="14sp"
+        android:textColor="@android:color/black"
+        app:layout_constraintStart_toEndOf="@id/cv_stock_icon"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/layout_price_info"
+        tools:text="미래반도체" />
+
+    <LinearLayout
+        android:id="@+id/layout_price_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginEnd="4dp"
+        android:gravity="end"
+        app:layout_constraintEnd_toStartOf="@id/iv_arrow"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <TextView
+            android:id="@+id/tv_stock_price"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="14sp"
+            android:textColor="@android:color/black"
+            tools:text="6,610원" />
+
+        <TextView
+            android:id="@+id/tv_stock_rate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:textColor="#FF5722"
+            tools:text="+14.61%" />
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_arrow"
+        android:layout_width="16dp"
+        android:layout_height="16dp"
+        android:src="@android:drawable/arrow_down_float"
+        android:rotation="270"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout> 

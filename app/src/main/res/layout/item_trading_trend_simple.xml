@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingVertical="8dp"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.2"
+        android:text="5월 30일"
+        android:textSize="12sp"
+        android:textColor="@color/text_secondary"
+        android:gravity="center"
+        android:padding="8dp" />
+
+    <TextView
+        android:id="@+id/tv_individual"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="+185억"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:padding="6dp"
+        android:layout_margin="2dp"
+        android:background="@drawable/bg_positive_value"
+        android:textColor="@color/red" />
+
+    <TextView
+        android:id="@+id/tv_foreign"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="+29억"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:padding="6dp"
+        android:layout_margin="2dp"
+        android:background="@drawable/bg_positive_value"
+        android:textColor="@color/red" />
+
+    <TextView
+        android:id="@+id/tv_institutional"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="-780억"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:padding="6dp"
+        android:layout_margin="2dp"
+        android:background="@drawable/bg_negative_value"
+        android:textColor="@color/primary_blue" />
+
+</LinearLayout> 

@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        android:paddingTop="24dp"
+        app:elevation="2dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:minHeight="?attr/actionBarSize"
+            app:contentInsetStart="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingHorizontal="12dp">
+
+                <ImageView
+                    android:id="@+id/iv_logo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:src="@drawable/logo_antwinner"
+                    android:contentDescription="@string/app_logo"
+                    android:adjustViewBounds="true"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent" />
+
+                <!-- 검색 아이콘 (CardView 제거하고 아이콘만 더 크게) -->
+                <ImageView
+                    android:id="@+id/iv_search"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_search"
+                    android:contentDescription="@string/search_icon"
+                    android:padding="2dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <!-- 숨겨진 EditText (검색 기능은 유지) -->
+                <EditText
+                    android:id="@+id/et_search"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:background="@null"
+                    android:hint="@string/search_hint"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:textSize="14sp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <!-- 섹션 1: 주식 시장 정보 배너 (전광판 효과) -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp"
+                    app:cardBackgroundColor="@android:color/transparent">
+                    
+                    <TextView
+                        android:id="@+id/tv_market_ticker"
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:gravity="center_vertical"
+                        android:paddingStart="16dp"
+                        android:paddingEnd="16dp"
+                        android:textColor="@color/black"
+                        android:textSize="14sp"
+                        android:textStyle="bold"
+                        android:singleLine="true"
+                        android:ellipsize="marquee"
+                        android:marqueeRepeatLimit="marquee_forever"
+                        android:scrollHorizontally="true"
+                        android:focusable="true"
+                        android:focusableInTouchMode="true"
+                        android:text="마켓 데이터 로딩 중..." />
+                </androidx.cardview.widget.CardView>
+
+                <!-- 섹션 2: 테마를 한눈에 -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="14dp"
+                    android:text="@string/thema_map_title"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary" />
+                
+                        <!-- 트리맵 레이아웃 -->
+        <com.example.antwinner_kotlin.ui.home.layout.TreemapLayout
+            android:id="@+id/treemap_layout"
+            android:layout_width="match_parent"
+            android:layout_height="550dp"
+            android:layout_marginBottom="24dp"
+            android:visibility="gone" />
+            
+        <!-- 트리맵 WebView -->
+        <com.example.antwinner_kotlin.ui.home.webview.TreemapWebView
+            android:id="@+id/treemap_webview"
+            android:layout_width="match_parent"
+            android:layout_height="550dp"
+            android:layout_marginBottom="24dp" />
+
+                <!-- AdFit 배너 광고 영역 -->
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="80dp"
+                    android:layout_marginBottom="24dp"
+                    android:background="#F5F5F5"
+                    android:padding="8dp">
+                    
+                    <com.kakao.adfit.ads.ba.BannerAdView
+                        android:id="@+id/banner_ad_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:visibility="visible"
+                        android:minHeight="50dp" />
+                    
+                    <!-- 광고 로딩 중 표시 (광고가 로드되면 숨김) -->
+                    <TextView
+                        android:id="@+id/tv_ad_loading"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:text="광고 로딩 중..."
+                        android:textSize="12sp"
+                        android:textColor="#999999"
+                        android:visibility="visible" />
+                </FrameLayout>
+
+                <!-- 섹션 3: 오늘 핫한 테마 -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="14dp"
+                    android:text="@string/hot_theme_title"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/text_primary" />
+                
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_hot_themes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="24dp"
+                    android:clipToPadding="false"
+                    android:overScrollMode="never" />
+
+                <!-- 섹션 4: 전체테마 보러가기 (개선된 디자인 - 옅은 회색) -->
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/btn_view_all_themes"
+                    android:layout_width="match_parent"
+                    android:layout_height="56dp"  
+                    android:layout_marginBottom="32dp"
+                    app:cardCornerRadius="16dp"  
+                    app:cardBackgroundColor="@color/background_light" 
+                    app:cardElevation="0dp" 
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:foreground="?attr/selectableItemBackground">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"
+                        android:gravity="center_vertical"
+                        android:paddingHorizontal="20dp">
+
+                        <TextView
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="@string/view_all_themes"
+                            android:textSize="16sp" 
+                            android:textStyle="bold" 
+                            android:textColor="@color/text_primary" /> 
+
+                        <ImageView
+                            android:layout_width="24dp" 
+                            android:layout_height="24dp"
+                            android:src="@drawable/ic_arrow_right" 
+                            app:tint="@color/text_secondary" 
+                            android:contentDescription="@string/view_all_themes" /> 
+                    </LinearLayout>
+                </com.google.android.material.card.MaterialCardView>
+
+                <!-- 섹션 5: 최근 테마 트렌드 -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:text="@string/today_investment_trend"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+                
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_trends"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="32dp"
+                    android:clipToPadding="false"
+                    android:nestedScrollingEnabled="false"
+                    android:overScrollMode="never" />
+
+                <!-- 섹션 6: 다가오는 테마 일정 (노려볼만한 테마) -->
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="12dp"
+                    android:text="@string/promising_themes"
+                    android:textSize="20sp"
+                    android:textStyle="bold"/>
+                
+                <!-- 노려볼만한 테마 가로 스크롤 -->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_promising_themes"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipToPadding="false"
+                    android:orientation="horizontal"
+                    android:paddingStart="0dp"
+                    android:paddingEnd="0dp"
+                    android:layout_marginBottom="32dp"
+                    android:overScrollMode="never"/>
+
+                <!-- 섹션 7: 실시간 시장 현황 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="12dp">
+                    
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="@string/realtime_market"
+                        android:textSize="20sp"
+                        android:textStyle="bold"/>
+                    
+                    <TextView
+                        android:id="@+id/tv_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2025-04-11 08:49 기준"
+                        android:textSize="12sp"
+                        android:textColor="@color/text_secondary"/>
+                </LinearLayout>
+
+                <!-- 주식 탭 레이아웃 -->
+                <androidx.cardview.widget.CardView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="32dp"
+                    app:cardCornerRadius="12dp"
+                    app:cardElevation="0dp">
+                    
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+                        
+                        <com.google.android.material.tabs.TabLayout
+                            android:id="@+id/tab_layout"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@android:color/transparent" 
+                            app:tabMode="scrollable" 
+                            app:tabIndicatorHeight="0dp" 
+                            app:tabRippleColor="@null" 
+                            app:tabPaddingStart="8dp" 
+                            app:tabPaddingEnd="8dp" /> 
+                        
+                        <androidx.viewpager2.widget.ViewPager2
+                            android:id="@+id/view_pager"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:minHeight="450dp" />
+                    </LinearLayout>
+                </androidx.cardview.widget.CardView>
+                
+                <!-- 섹션 8: 가장 많이 오른 종목은? -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginBottom="24dp">
+
+                    <!-- 섹션 제목과 필터 -->
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical"
+                        android:layout_marginBottom="16dp">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:text="가장 많이 오른 종목은?"
+                            android:textSize="20sp"
+                            android:textStyle="bold"
+                            android:layout_marginBottom="12dp"/>
+
+                        <!-- 기간 필터 버튼들 -->
+                        <HorizontalScrollView
+                            android:id="@+id/hsv_period_filter"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:scrollbars="none">
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:orientation="horizontal">
+
+                                <com.google.android.material.chip.Chip
+                                    android:id="@+id/chip_weekly"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="주간 수익률"
+                                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                                    app:chipBackgroundColor="#F0F0F0"/>
+
+                                <com.google.android.material.chip.Chip
+                                    android:id="@+id/chip_monthly"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="월간 수익률"
+                                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                                    app:chipBackgroundColor="#F0F0F0"
+                                    android:layout_marginStart="8dp"/>
+
+                                <com.google.android.material.chip.Chip
+                                    android:id="@+id/chip_3months"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="3개월 수익률"
+                                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                                    app:chipBackgroundColor="#F0F0F0"
+                                    android:layout_marginStart="8dp"/>
+
+                                <com.google.android.material.chip.Chip
+                                    android:id="@+id/chip_6months"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="6개월 수익률"
+                                    style="@style/Widget.MaterialComponents.Chip.Choice"
+                                    app:chipBackgroundColor="#000000"
+                                    app:chipStrokeWidth="0dp"
+                                    android:textColor="@color/white"
+                                    android:layout_marginStart="8dp"
+                                    android:checked="true"/>
+                            </LinearLayout>
+                        </HorizontalScrollView>
+                    </LinearLayout>
+                    
+                    <!-- 상승 종목 리스트 -->
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:id="@+id/vp_top_rising_stocks"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:nestedScrollingEnabled="false" />
+                </LinearLayout>
+            </LinearLayout>
+        </androidx.core.widget.NestedScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout> 

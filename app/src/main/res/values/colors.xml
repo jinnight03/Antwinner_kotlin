@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="purple_200">#FFBB86FC</color>
+    <color name="purple_500">#FF6200EE</color>
+    <color name="purple_700">#FF3700B3</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    
+    <!-- 앱 테마 색상 -->
+    <color name="primary">#FFFFFF</color>
+    <color name="primary_dark">#CCCCCC</color>
+    <color name="primary_light">#3F51B5</color>
+    <color name="accent">#03DAC5</color>
+    
+    <!-- 텍스트 색상 -->
+    <color name="text_primary">#FF000000</color>
+    <color name="text_secondary">#666666</color>
+    
+    <!-- 주식 시장 색상 -->
+    <color name="market_up">#FF0000</color>
+    <color name="market_down">#0000FF</color>
+    <color name="market_neutral">#808080</color>
+    
+    <!-- 배경 색상 -->
+    <color name="background_light">#F5F5F5</color>
+    <color name="background_card">#FFFFFF</color>
+    <color name="background_light_gray">#EEEEEE</color>
+    <color name="background_primary">#F5F5F5</color>
+    
+    <!-- 구분선 색상 -->
+    <color name="divider_color">#EEEEEE</color>
+    <color name="gray_light">#E0E0E0</color>
+    <color name="light_gray">#CCCCCC</color>
+    
+    <!-- 강조 색상 -->
+    <color name="red">#FF0000</color>
+    <color name="primary_blue">#1E88E5</color>
+    <color name="icon_modern_gray">#6B7280</color>
+    <color name="excellent_green">#10B981</color>
+    <color name="good_blue">#3B82F6</color>
+    <color name="warning_orange">#F59E0B</color>
+    <color name="danger_red">#EF4444</color>
+    <color name="metric_background">#F8FAFC</color>
+    <color name="progress_background">#E5E7EB</color>
+    
+    <!-- 아이콘 틴트 색상 -->
+    <color name="icon_tint_light">#757575</color>
+    
+    <color name="colorPrimary">#1E88E5</color>
+    <color name="colorPrimaryDark">#1565C0</color>
+    <color name="colorAccent">#FF4081</color>
+    
+    <!-- 탭 관련 색상 개선 -->
+    <color name="tab_selected_color">#1E88E5</color>
+    <color name="tab_unselected_color">#9E9E9E</color>
+    <color name="background_dark">#E0E0E0</color>
+    <color name="rising_color">#FF0000</color>
+    <color name="rising_color_light">#FF6B6B</color>
+    <color name="falling_color">#0000FF</color>
+
+    <!-- 기간 선택 칩 색상 -->
+    <color name="period_chip_background_checked">#1A73E8</color>
+    <color name="period_chip_background_unchecked">#F0F0F0</color>
+    <color name="period_chip_text_checked">#FFFFFF</color>
+    <color name="period_chip_text_unchecked">#666666</color>
+    <color name="period_chip_text_disabled">#61000000</color>
+    
+    <!-- Theme Detail Colors -->
+    <color name="theme_detail_background">#F5F6F8</color>
+    <color name="theme_detail_text_primary">#212121</color>
+    <color name="theme_detail_text_secondary">#757575</color>
+    <color name="theme_detail_chart_line">#2196F3</color>
+    <color name="theme_detail_chip_bg_color">#E3F2FD</color>
+    <color name="theme_detail_chip_text_color">#1976D2</color>
+    <color name="theme_detail_card_background">#FFFFFF</color>
+    <color name="theme_detail_card_stroke">#E0E0E0</color>
+    <color name="theme_detail_title_color">#212121</color>
+    <color name="theme_detail_description_color">#757575</color>
+    <color name="theme_detail_chip_background">@color/colorPrimary</color>
+    <color name="theme_detail_chip_text">@color/white</color>
+    <color name="theme_detail_positive_color">#4CAF50</color>
+    <color name="theme_detail_negative_color">#F44336</color>
+    <color name="theme_detail_button_background">@color/colorPrimary</color>
+    <color name="theme_detail_button_text">@color/white</color>
+    <color name="theme_detail_positive">#2D5BF0</color>
+    <color name="theme_detail_negative">#F03D3D</color>
+    <color name="theme_detail_divider">#E5E5E5</color>
+
+    <!-- 추가: 배지 배경 색상 -->
+    <color name="bg_rising_badge">#FFF1F3</color> <!-- 연한 빨강 계열 -->
+    <color name="bg_falling_badge">#E3F2FD</color> <!-- 연한 파랑 계열 -->
+    <color name="bg_neutral_badge">#F5F5F5</color> <!-- 회색 계열 -->
+
+    <!-- 새로 추가된 색상 -->
+    <color name="chip_background">#F0F0F0</color>
+    <color name="chip_text">#333333</color>
+
+    <!-- 추가된 레이아웃 색상 -->
+    <color name="background_gray">#F2F2F2</color>
+    
+    <!-- 기존 하드코딩 색상과 호환을 위한 추가 색상 -->
+    <color name="secondary_text_light">#888888</color>
+    <color name="card_bubble_background">#F2F2F2</color>
+
+    <!-- 차트 색상 -->
+    <color name="chart_red">#EF5350</color>
+    <color name="chart_blue">#42A5F5</color>
+    <color name="chart_volume">#9E9E9E</color>
+    <color name="chart_line">#333333</color>
+    <color name="chart_shadow">#999999</color>
+
+    <!-- 주가 변동 색상 -->
+    <color name="price_up">#FF0000</color>
+    <color name="price_down">#0000FF</color>
+    <color name="price_unchanged">#888888</color>
+    <color name="price_up_volume">#FFDDDD</color>
+    <color name="price_down_volume">#DDDDFF</color>
+    
+    <!-- 시장 구분 색상 -->
+    <color name="kospi_color">#2196F3</color>  <!-- 코스피 (주황색) -->
+    <color name="kosdaq_color">#FF9800</color>  <!-- 코스닥 (주황색) -->
+    <color name="other_market_color">#4CAF50</color>  <!-- 기타 (초록색) -->
+    
+    <!-- 섹션 배경 색상 -->
+    <color name="section_background">#F5F5F5</color>
+    
+    <!-- 기간 버튼 선택 색상 -->
+    <color name="button_light_gray">#F1F1F1</color>  <!-- 아주 옅은 회색 -->
+    
+    <!-- 실적 차트 색상 -->
+    <color name="light_green">#A5D6A7</color>    <!-- 매출 (연한 초록) -->
+    <color name="medium_green">#66BB6A</color>   <!-- 영업이익 (중간 초록) -->
+    <color name="dark_green">#388E3C</color>     <!-- 순이익 (진한 초록) -->
+    
+    <!-- 5단계 투자 지표 평가 색상 -->
+    <color name="rating_excellent">#10B981</color>    <!-- 우수 (에메랄드 그린) -->
+    <color name="rating_good">#3B82F6</color>         <!-- 양호 (파란색) -->
+    <color name="rating_average">#F59E0B</color>      <!-- 보통 (주황색) -->
+    <color name="rating_poor">#EF4444</color>         <!-- 저조 (빨간색) -->
+    <color name="rating_bad">#DC2626</color>          <!-- 불량 (진한 빨간색) -->
+    
+    <!-- 5단계 배경 색상 (연한 버전) -->
+    <color name="bg_rating_excellent">#D1FAE5</color>  <!-- 연한 에메랄드 그린 -->
+    <color name="bg_rating_good">#DBEAFE</color>       <!-- 연한 파란색 -->
+    <color name="bg_rating_average">#FEF3C7</color>    <!-- 연한 주황색 -->
+    <color name="bg_rating_poor">#FEE2E2</color>       <!-- 연한 빨간색 -->
+    <color name="bg_rating_bad">#FEE2E2</color>        <!-- 연한 빨간색 (더 진함) -->
+</resources>

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingVertical="8dp"
+    android:background="@color/white">
+
+    <TextView
+        android:id="@+id/tv_date"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:text="6월 13일"
+        android:textSize="12sp"
+        android:textColor="@color/text_secondary"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:padding="8dp" />
+
+    <TextView
+        android:id="@+id/tv_individual"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:text="+185억"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:padding="6dp"
+        android:layout_margin="2dp"
+        android:background="@drawable/bg_positive_value"
+        android:textColor="@color/red" />
+
+    <TextView
+        android:id="@+id/tv_foreign"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:text="+29억"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:padding="6dp"
+        android:layout_margin="2dp"
+        android:background="@drawable/bg_positive_value"
+        android:textColor="@color/red" />
+
+    <TextView
+        android:id="@+id/tv_securities"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:padding="6dp"
+        android:layout_margin="2dp"
+        android:background="@drawable/bg_neutral_value"
+        android:textColor="@color/text_secondary" />
+
+    <TextView
+        android:id="@+id/tv_other_corporation"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:text="-31억"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:padding="6dp"
+        android:layout_margin="2dp"
+        android:background="@drawable/bg_negative_value"
+        android:textColor="@color/primary_blue" />
+
+    <TextView
+        android:id="@+id/tv_other_foreign"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:text="+15억"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:padding="6dp"
+        android:layout_margin="2dp"
+        android:background="@drawable/bg_positive_value"
+        android:textColor="@color/red" />
+
+    <TextView
+        android:id="@+id/tv_insurance"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:padding="6dp"
+        android:layout_margin="2dp"
+        android:background="@drawable/bg_neutral_value"
+        android:textColor="@color/text_secondary" />
+
+    <TextView
+        android:id="@+id/tv_private_equity"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:padding="6dp"
+        android:layout_margin="2dp"
+        android:background="@drawable/bg_neutral_value"
+        android:textColor="@color/text_secondary" />
+
+    <TextView
+        android:id="@+id/tv_pension"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:padding="6dp"
+        android:layout_margin="2dp"
+        android:background="@drawable/bg_neutral_value"
+        android:textColor="@color/text_secondary" />
+
+    <TextView
+        android:id="@+id/tv_bank"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:padding="6dp"
+        android:layout_margin="2dp"
+        android:background="@drawable/bg_neutral_value"
+        android:textColor="@color/text_secondary" />
+
+    <TextView
+        android:id="@+id/tv_investment"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:padding="6dp"
+        android:layout_margin="2dp"
+        android:background="@drawable/bg_neutral_value"
+        android:textColor="@color/text_secondary" />
+
+    <TextView
+        android:id="@+id/tv_other_finance"
+        android:layout_width="70dp"
+        android:layout_height="wrap_content"
+        android:text="0"
+        android:textSize="12sp"
+        android:gravity="center"
+        android:textAlignment="center"
+        android:padding="6dp"
+        android:layout_margin="2dp"
+        android:background="@drawable/bg_neutral_value"
+        android:textColor="@color/text_secondary" />
+
+</LinearLayout> 

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingVertical="10dp"
+    android:paddingHorizontal="16dp"
+    android:foreground="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true">
+
+    <!-- 순위 -->
+    <TextView
+        android:id="@+id/tv_rank"
+        android:layout_width="28dp"
+        android:layout_height="wrap_content"
+        android:text="1"
+        android:textSize="18sp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <!-- 검색어 이름 -->
+    <TextView
+        android:id="@+id/tv_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="넥스트 테크놀로지 홀딩"
+        android:textSize="16sp"
+        android:textColor="@color/black"
+        android:maxLines="1"
+        android:ellipsize="end"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toEndOf="@id/tv_rank"
+        app:layout_constraintEnd_toStartOf="@id/tv_change_rate"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <!-- 상승/하락률 -->
+    <TextView
+        android:id="@+id/tv_change_rate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="▲ 661.29%"
+        android:textSize="16sp"
+        android:textColor="#FF4444"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout> 

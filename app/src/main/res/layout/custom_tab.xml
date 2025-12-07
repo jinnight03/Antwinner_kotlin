@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.chip.Chip xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/tab_chip"
+    style="@style/Widget.MaterialComponents.Chip.Choice" 
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:chipBackgroundColor="@color/chip_state_selector" 
+    android:textColor="@color/chip_text_state_selector" 
+    android:checkable="true"
+    android:clickable="true"
+    android:focusable="true"
+    android:paddingStart="12dp" 
+    android:paddingEnd="12dp"
+    android:paddingTop="6dp"
+    android:paddingBottom="6dp"
+    android:textSize="14sp"
+    app:chipCornerRadius="20dp" 
+    app:chipStrokeWidth="0dp" 
+    tools:text="탭 이름">
+
+</com.google.android.material.chip.Chip> 

@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="com.google.android.gms.permission.AD_ID" />
+
+    <application
+        android:name=".MyApplication"
+        android:allowBackup="true"
+        android:usesCleartextTraffic="true"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:fullBackupContent="@xml/backup_rules"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Antwinner_kotlin"
+        tools:targetApi="31"
+        android:networkSecurityConfig="@xml/network_security_config">
+        
+        <activity
+            android:name=".MainActivity"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        
+        <activity
+            android:name=".ui.theme.AllThemesActivity"
+            android:exported="false" />
+            
+        <activity
+            android:name=".ui.themedetail.ThemeDetailActivity"
+            android:exported="false" />
+            
+        <!-- StockDetailActivity declaration -->
+        <activity
+            android:name=".ui.stockdetail.StockDetailActivity"
+            android:exported="false" />
+            
+        <!-- SearchActivity declaration -->
+        <activity
+            android:name=".ui.search.SearchActivity"
+            android:windowSoftInputMode="adjustResize"
+            android:exported="false" />
+            
+        <!-- IPO Detail Activity declaration -->
+        <activity
+            android:name=".ui.themeschedule.IpoDetailActivity"
+            android:exported="false" />
+            
+        <!-- WebView Activity declaration -->
+        <activity
+            android:name=".ui.webview.WebViewActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Antwinner_kotlin" />
+            
+        <!-- Widget Configuration Activity -->
+        <activity
+            android:name=".widget.ThemeWidgetConfigActivity"
+            android:exported="false"
+            android:theme="@style/Theme.Antwinner_kotlin" />
+            
+        <!-- Widget Provider -->
+        <receiver
+            android:name=".widget.ThemeWidgetProvider"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+                <action android:name="com.example.antwinner_kotlin.ACTION_UPDATE_WIDGET" />
+                <action android:name="com.example.antwinner_kotlin.ACTION_THEME_CLICK" />
+            </intent-filter>
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/theme_widget_info" />
+        </receiver>
+        
+        <!-- Widget Service -->
+        <service
+            android:name=".widget.ThemeWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS"
+            android:exported="false" />
+        
+        <!-- 카카오 AdFit Service -->
+        <service
+            android:name="com.kakao.adfit.ads.AdFitService"
+            android:exported="false" />
+            
+        <!-- Temporarily comment out FlutterActivity to check for conflicts -->
+        <!-- 
+        <activity
+            android:name="io.flutter.embedding.android.FlutterActivity"
+            android:theme="@style/Theme.Antwinner_kotlin" 
+            android:configChanges="orientation|keyboardHidden|keyboard|screenSize|locale|layoutDirection|fontScale|screenLayout|density|uiMode"
+            android:hardwareAccelerated="true"
+            android:windowSoftInputMode="adjustResize"
+            android:exported="true" /> 
+        -->
+        
+    </application>
+
+</manifest>

@@ -1,0 +1,21 @@
+pluginManagement {
+    repositories {
+        google()
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
+dependencyResolutionManagement {
+    repositoriesMode.set(RepositoriesMode.PREFER_PROJECT)
+    repositories {
+        google()
+        mavenCentral()
+        maven { url 'https://jitpack.io' }
+        // 카카오 AdFit SDK 저장소
+        maven { url 'https://devrepo.kakao.com/nexus/content/groups/public/' }
+    }
+}
+
+rootProject.name = "antwinner_kotlin"
+include ':app'

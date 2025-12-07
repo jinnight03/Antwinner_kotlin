@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".ui.themedetail.ThemeDetailActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/white"
+        app:elevation="0dp">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:contentInsetStart="0dp">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginStart="16dp"
+                    android:src="@drawable/ic_back"
+                    android:contentDescription="뒤로가기"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <ImageView
+                    android:id="@+id/iv_search"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginEnd="16dp"
+                    android:src="@drawable/ic_search"
+                    android:contentDescription="검색"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+                
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.appcompat.widget.Toolbar>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- 메인 콘텐츠 스크롤 뷰에 ID 추가 -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/content_scroll_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <!-- 테마 정보 섹션 -->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@android:color/white"
+                android:padding="16dp">
+
+                <!-- 테마 순위 정보 (맨 위로 이동) -->
+                <TextView
+                    android:id="@+id/tv_theme_rank"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/rising_color"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:text="🔥 월간 상승 1위 테마" />
+
+                <!-- 숨겨진 카드뷰 (기존 참조 유지용) -->
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/card_theme_rank"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:visibility="gone"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/tv_theme_name"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/black"
+                    android:textSize="24sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_theme_rank"
+                    app:layout_constraintEnd_toStartOf="@id/iv_theme_icon"
+                    android:layout_marginEnd="16dp"
+                    tools:text="반도체(인공지능)" />
+
+                <TextView
+                    android:id="@+id/tv_theme_info"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textColor="#9E9E9E"
+                    android:textSize="16sp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_theme_name"
+                    app:layout_constraintEnd_toStartOf="@id/iv_theme_icon"
+                    tools:text="16개 테마주 · 이슈 345건" />
+
+                <!-- 테마 등락률 (동그란 회색 음영) -->
+                <TextView
+                    android:id="@+id/tv_theme_rate"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:background="@drawable/bg_rounded_light_gray"
+                    android:paddingHorizontal="16dp"
+                    android:paddingVertical="8dp"
+                    android:textColor="@color/rising_color"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_theme_info"
+                    tools:text="+14.61%" />
+
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/iv_theme_icon"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:scaleType="centerCrop"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/tv_theme_rank"
+                    android:layout_marginTop="8dp"
+                    app:shapeAppearanceOverlay="@style/RoundedCornerImage"
+                    app:strokeWidth="0dp"
+                    tools:src="@drawable/ic_launcher_foreground" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#E0E0E0" />
+
+            <!-- 테마 추이 차트 섹션 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tv_theme_issue_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="테마 이슈 추세"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_chart_subtitle"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:textColor="@color/text_secondary"
+                    android:textSize="14sp"
+                    tools:text="최근 6개월 이슈횟수 123회" />
+
+                <!-- 차트 영역 (커스텀 차트로 변경) -->
+                <com.example.antwinner_kotlin.ui.components.SimpleBarChartView
+                    android:id="@+id/bar_chart_theme_trend"
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_marginTop="12dp" />
+
+                <!-- 기간 선택 탭 -->
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:scrollbars="none">
+
+                    <com.google.android.material.chip.ChipGroup
+                        android:id="@+id/period_chip_group"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        app:singleSelection="true"
+                        app:selectionRequired="true">
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip_1w"
+                            style="@style/PeriodChipChoice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1주" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip_1m"
+                            style="@style/PeriodChipChoice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1달" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip_6m"
+                            style="@style/PeriodChipChoice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="6달" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip_1y"
+                            style="@style/PeriodChipChoice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="1년" />
+
+                        <com.google.android.material.chip.Chip
+                            android:id="@+id/chip_all"
+                            style="@style/PeriodChipChoice"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="전체" />
+                    </com.google.android.material.chip.ChipGroup>
+                </HorizontalScrollView>
+            </LinearLayout>
+
+            <!-- 테마주 섹션 새로 추가 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_marginTop="16dp"
+                android:paddingHorizontal="16dp"
+                android:paddingBottom="16dp">
+
+                <TextView
+                    android:id="@+id/tv_theme_stocks_title_new"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="테마주"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/tv_theme_stocks_count_new"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:textColor="#666666"
+                    android:textSize="14sp"
+                    tools:text="총 0개" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="8dp"
+                    android:background="#EEEEEE" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_theme_stocks_new"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:nestedScrollingEnabled="false"
+                    app:layout_constraintTop_toBottomOf="@id/tv_theme_stocks_count_new"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <!-- 추가: 더보기/접기 버튼 -->
+                <TextView
+                    android:id="@+id/btn_toggle_stocks"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:paddingVertical="10dp"
+                    android:gravity="center"
+                    android:text="@string/show_more"  
+                    android:textSize="14sp"
+                    android:textColor="@color/text_secondary"
+                    android:background="@drawable/bg_show_more_button"
+                    android:visibility="gone"
+                    app:layout_constraintTop_toBottomOf="@id/rv_theme_stocks_new"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+            </LinearLayout>
+            
+            <!-- 구분선 -->
+            <View
+                android:id="@+id/divider_after_stocks"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:layout_marginTop="16dp"
+                android:background="#F5F5F5" />
+
+            <!-- 추가: 테마 급등 이유 섹션 -->
+            <LinearLayout
+                android:id="@+id/layout_surge_reason"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tv_surge_reason_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    tools:text="반도체(인공지능) 급등 이유" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_surge_reasons"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:nestedScrollingEnabled="false"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/item_theme_surge_reason" />
+
+                <!-- 추가: 급등 이유 더보기/접기 버튼 -->
+                <TextView
+                    android:id="@+id/btn_toggle_surge_reasons"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:paddingVertical="10dp"
+                    android:gravity="center"
+                    android:text="@string/show_more" 
+                    android:textSize="14sp"
+                    android:textColor="@color/text_secondary"
+                    android:background="@drawable/bg_show_more_button" 
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+            <!-- 구분선 -->
+            <View
+                android:id="@+id/divider_after_surge_reasons"
+                android:layout_width="match_parent"
+                android:layout_height="8dp"
+                android:layout_marginTop="16dp"
+                android:background="#F5F5F5" />
+
+            <!-- 관련 뉴스 섹션 -->
+            <LinearLayout
+                android:id="@+id/layout_related_news"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/tv_related_news_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="관련 뉴스"
+                    android:textColor="@color/black"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_related_news"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:nestedScrollingEnabled="false"
+                    tools:itemCount="3"
+                    tools:listitem="@layout/item_news_card" />
+
+                <!-- 더보기 버튼 -->
+                <TextView
+                    android:id="@+id/btn_toggle_news"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:paddingVertical="10dp"
+                    android:gravity="center"
+                    android:text="검색 결과 더보기 >"
+                    android:textSize="14sp"
+                    android:textColor="@color/text_secondary"
+                    android:background="@drawable/bg_show_more_button"
+                    android:visibility="gone" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <!-- 추가: 정보 없음 상태 표시 레이아웃 -->
+    <LinearLayout
+        android:id="@+id/layout_no_data"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:padding="32dp"
+        android:layout_gravity="center" 
+        android:visibility="gone" 
+        tools:visibility="visible"> 
+
+        <!-- ImageView 제거
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/ic_error_outline" 
+            android:layout_marginBottom="16dp"
+            app:tint="@color/text_secondary" 
+            android:contentDescription="@string/error_icon_desc"/> 
+        -->
+
+        <TextView
+            android:id="@+id/tv_no_data_message"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/theme_info_not_found" 
+            android:textSize="16sp"
+            android:textColor="@color/text_secondary"
+            android:gravity="center"/>
+    </LinearLayout>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout> 

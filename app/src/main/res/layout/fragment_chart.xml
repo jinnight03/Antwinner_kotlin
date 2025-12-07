@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="500dp"
+    android:orientation="vertical"
+    android:background="@color/white">
+
+    <!-- 캔들스틱 차트 영역 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3"
+        android:orientation="vertical">
+
+        <!-- 메인 캔들스틱 차트 -->
+        <com.github.mikephil.charting.charts.CombinedChart
+            android:id="@+id/candlestick_chart"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="8dp" />
+
+    </LinearLayout>
+
+    <!-- 거래량 차트 영역 -->
+    <com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/volume_chart"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:layout_marginHorizontal="8dp"
+        android:layout_marginBottom="8dp" />
+
+    <!-- 기간 선택 버튼들 -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginBottom="12dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:weightSum="5">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_period_1w"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="4dp"
+            android:text="1주"
+            android:textSize="13sp"
+            android:textColor="#888888"
+            android:background="@drawable/bg_period_button_selector"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:minWidth="0dp"
+            android:minHeight="0dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_period_1m"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="4dp"
+            android:text="1개월"
+            android:textSize="13sp"
+            android:textColor="#888888"
+            android:background="@drawable/bg_period_button_selector"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:minWidth="0dp"
+            android:minHeight="0dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_period_3m"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="4dp"
+            android:text="3개월"
+            android:textSize="13sp"
+            android:textColor="#888888"
+            android:background="@drawable/bg_period_button_selector"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:minWidth="0dp"
+            android:minHeight="0dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_period_1y"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="4dp"
+            android:text="1년"
+            android:textSize="13sp"
+            android:textColor="#888888"
+            android:background="@drawable/bg_period_button_selector"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:minWidth="0dp"
+            android:minHeight="0dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_period_all"
+            style="@style/Widget.Material3.Button.TextButton"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="4dp"
+            android:text="전체"
+            android:textSize="13sp"
+            android:textColor="#888888"
+            android:background="@drawable/bg_period_button_selector"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:minWidth="0dp"
+            android:minHeight="0dp" />
+
+    </LinearLayout>
+
+</LinearLayout> 

@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Treemap</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            background-color: #f8f9fa;
+            /* 링크 long press시 미리보기 나오지 않도록 설정 */
+            -webkit-touch-callout: none;
+            /* 텍스트 선택 방지 */
+            -webkit-user-select: none;
+            /* 터치 시 어두워지는 색상 제거 */
+            -webkit-tap-highlight-color: rgba(0,0,0,0);
+        }
+        
+        svg {
+            display: block;
+        }
+        
+        .loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 16px;
+            color: #666;
+        }
+    </style>
+    <script src="https://d3js.org/d3.v6.min.js"></script>
+</head>
+<body>
+    <div class="loading" id="loading">데이터 로딩 중...</div>
+    
+    <script>
+        // Android에서 호출할 수 있는 전역 함수들
+        window.updateTreemapData = function(jsonData) {
+            console.log('Received data:', jsonData);
+            
+            // 로딩 숨김
+            document.getElementById('loading').style.display = 'none';
+            
+            try {
+                const data = typeof jsonData === 'string' ? JSON.parse(jsonData) : jsonData;
+                updateTreemap(data);
+            } catch (e) {
+                console.error('Error parsing data:', e);
+                showError('데이터 파싱 오류');
+            }
+        };
+        
+        // 테마 클릭 처리 함수
+        function handleThemeClick(themeName) {
+            console.log('handleThemeClick called:', themeName);
+            
+            // 중복 클릭 방지
+            if (window.clickTimeout) {
+                clearTimeout(window.clickTimeout);
+            }
+            
+            window.clickTimeout = setTimeout(() => {
+                if (window.Android) {
+                    console.log('Calling Android.onThemeClick:', themeName);
+                    window.Android.onThemeClick(themeName);
+                } else {
+                    console.warn('Android interface not available');
+                }
+                window.clickTimeout = null;
+            }, 50); // 50ms 딜레이로 중복 클릭 방지
+        }
+        
+        function showError(message) {
+            document.getElementById('loading').textContent = message;
+            document.getElementById('loading').style.display = 'block';
+        }
+        
+        function updateTreemap(data) {
+            const width = window.innerWidth;
+            const height = window.innerHeight;
+
+            // 기본 색상 설정 (Android 테마 색상과 맞춤)
+            const backgroundColor = { r: 248, g: 249, b: 250 }; // #f8f9fa
+            const emptyViewTextColor = { r: 102, g: 102, b: 102 }; // #666666
+            const riseColor = { r: 255, g: 0, b: 0 }; // 빨간색
+            const fallColor = { r: 33, g: 150, b: 243 }; // 모던한 파란색 (Material Design Blue)
+
+            // 데이터가 비어 있는지 확인
+            if (!data || !data.themes || data.themes.length === 0) {
+                // 기존 SVG 제거
+                d3.select("svg").remove();
+
+                // 회색 배경의 SVG 생성
+                const svg = d3.select("body").append("svg")
+                    .attr("width", width)
+                    .attr("height", height)
+                    .style("background-color", `rgb(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b})`);
+
+                // "데이터가 없습니다" 텍스트 추가
+                svg.append("text")
+                    .attr("x", width / 2)
+                    .attr("y", height / 2)
+                    .attr("text-anchor", "middle")
+                    .style("font-size", "18px")
+                    .style("fill", `rgb(${emptyViewTextColor.r}, ${emptyViewTextColor.g}, ${emptyViewTextColor.b})`)
+                    .text("데이터가 없습니다.");
+                return;
+            }
+
+            // 상승/하락 테마 분리
+            const riseThemes = data.themes.filter(t => t.isRising);
+            const fallThemes = data.themes.filter(t => !t.isRising);
+            
+            const riseSum = d3.sum(riseThemes, d => Math.abs(d.rate));
+            const fallSum = d3.sum(fallThemes, d => Math.abs(d.rate));
+            const totalSum = riseSum + fallSum;
+            
+            // 최대값 계산
+            const maxRiseValue = d3.max(riseThemes, d => Math.abs(d.rate)) || 0;
+            const maxFallValue = d3.max(fallThemes, d => Math.abs(d.rate)) || 0;
+
+            // 하락 테마가 아무리 작아도 전체의 최소 10% 차지하도록 보정 (7% -> 10%로 증가)
+            const minFallRatio = 0.10;
+            const rawFallRatio = fallSum / totalSum;
+
+            let riseScale = 1;
+            let fallScale = 1;
+
+            if (rawFallRatio < minFallRatio && fallSum > 0 && riseSum > 0) {
+                fallScale = minFallRatio / rawFallRatio;
+                riseScale = (1 - minFallRatio) / (1 - rawFallRatio);
+            }
+            
+            // 전체적으로 박스 크기를 키우기 위한 스케일 팩터
+            const globalScale = 1.15; // 15% 크기 증가
+            riseScale *= globalScale;
+            fallScale *= globalScale;
+
+            // 색상 함수
+            const color = d => {
+                const absValue = Math.abs(d.rate);
+                const adjustedMaxRise = maxRiseValue < 5 ? 5 : maxRiseValue;
+                const adjustedMaxFall = maxFallValue < 5 ? 5 : maxFallValue;
+
+                const normalizedRiseValue = Math.min(Math.max(absValue, 0), adjustedMaxRise);
+                const normalizedFallValue = Math.min(Math.max(absValue, 0), adjustedMaxFall);
+
+                const riseAlpha = 0.1 + (normalizedRiseValue / adjustedMaxRise) * 0.75;
+                const fallAlpha = 0.1 + (normalizedFallValue / adjustedMaxFall) * 0.75;
+
+                return d.isRising
+                    ? `rgba(${riseColor.r}, ${riseColor.g}, ${riseColor.b}, ${riseAlpha})`
+                    : `rgba(${fallColor.r}, ${fallColor.g}, ${fallColor.b}, ${fallAlpha})`;
+            };
+
+            // 트리맵 생성 (패딩을 줄여서 박스를 더 크게)
+            const treemap = data => d3.treemap()
+                .size([width, height])
+                .paddingInner(4)  // 6 -> 4로 줄임
+                .paddingOuter(0)
+                (d3.hierarchy(data)
+                    .sum(d => {
+                        const value = Math.abs(d.rate);
+                        if (d.isRising) return value * riseScale;
+                        if (!d.isRising) return value * fallScale;
+                        return undefined;
+                    })
+                    .sort((a, b) => b.value - a.value));
+
+            const hierarchyData = {
+                "name": "root",
+                "children": [
+                    {
+                        "name": "상승",
+                        "children": riseThemes
+                    },
+                    {
+                        "name": "하락", 
+                        "children": fallThemes
+                    }
+                ]
+            };
+
+            const root = treemap(hierarchyData);
+
+            d3.select("svg").remove();
+
+            const svg = d3.select("body").append("svg")
+                .attr("width", width)
+                .attr("height", height);
+
+            svg.append("rect")
+                .attr("width", width)
+                .attr("height", height)
+                .attr("fill", `rgb(${backgroundColor.r}, ${backgroundColor.g}, ${backgroundColor.b})`);
+
+            const nodes = svg.selectAll("g")
+                .data(root.leaves())
+                .enter().append("g")
+                .attr("transform", d => `translate(${d.x0},${d.y0})`)
+                .style("cursor", "pointer") // 커서 모양 변경
+                .on("click", function(event, d) {
+                    // 클릭 이벤트 처리
+                    event.preventDefault();
+                    event.stopPropagation();
+                    console.log('Theme clicked:', d.data.name);
+                    handleThemeClick(d.data.name);
+                })
+                .on("touchstart", function(event, d) {
+                    // 터치 이벤트도 처리 (모바일 대응)
+                    event.preventDefault();
+                    console.log('Theme touched:', d.data.name);
+                })
+                .on("touchend", function(event, d) {
+                    // 터치 종료 시 클릭으로 처리
+                    event.preventDefault();
+                    event.stopPropagation();
+                    console.log('Theme touch ended:', d.data.name);
+                    handleThemeClick(d.data.name);
+                });
+
+            nodes.append("rect")
+                .attr("class", "node")
+                .attr("width", d => d.x1 - d.x0)
+                .attr("height", d => d.y1 - d.y0)
+                .attr("rx", 12) // Corner radius 설정
+                .attr("ry", 12) // Corner radius 설정
+                .attr("fill", d => color(d.data));
+
+            nodes.append("text")
+                .attr("x", d => (d.x1 - d.x0) / 2)
+                .attr("y", d => (d.y1 - d.y0) / 2)
+                .attr("text-anchor", "middle")
+                .style("fill", "white")
+                .style("pointer-events", "none") // 텍스트가 클릭 이벤트를 방해하지 않도록
+                .each(function(d) {
+                    let nameFontSize = 16;
+                    let valueFontSize = 14;
+                    let textElement = d3.select(this);
+                    const name = d.data.name;
+                    const value = `${d.data.rate > 0 ? '+' : ''}${d.data.rate.toFixed(2)}%`;
+                    
+                    // 이름과 값을 각각의 줄에 표시
+                    const nameSpan = textElement.append("tspan")
+                        .attr("x", (d.x1 - d.x0) / 2)
+                        .attr("dy", "-0.3em")
+                        .style("font-weight", "600")
+                        .style("font-size", `${nameFontSize}px`)
+                        .text(name);
+                    
+                    const valueSpan = textElement.append("tspan")
+                        .attr("x", (d.x1 - d.x0) / 2)
+                        .attr("dy", "1.2em") // value와 name 사이 간격
+                        .style("font-weight", "500")
+                        .style("font-size", `${valueFontSize}px`)
+                        .text(value);
+
+                    // 개선된 폰트 크기 및 간격 조정 함수
+                    function adjustFontSizeAndSpacing() {
+                        nameSpan.style("font-size", `${nameFontSize}px`);
+                        valueSpan.style("font-size", `${valueFontSize}px`);
+                        valueSpan.style("display", null);
+                        
+                        let rectWidth = d.x1 - d.x0 - 12; // 패딩을 줄임 (20 -> 12)
+                        let rectHeight = d.y1 - d.y0 - 12; // 패딩을 줄임 (20 -> 12)
+                        
+                        function updateAndMeasure() {
+                            nameSpan.style("font-size", `${nameFontSize}px`);
+                            valueSpan.style("font-size", `${valueFontSize}px`);
+                            return textElement.node().getBBox();
+                        }
+                        
+                        // 말줄임 함수 (더 관대하게)
+                        function truncateText(tspan, text, maxWidth) {
+                            let truncated = text;
+                            while (tspan.node().getComputedTextLength() > maxWidth && truncated.length > 1) { // 최소 1글자는 남김
+                                truncated = truncated.slice(0, -1);
+                                tspan.text(truncated + "...");
+                            }
+                            // 1글자도 안 들어가면 첫 글자만
+                            if (tspan.node().getComputedTextLength() > maxWidth && truncated.length === 1) {
+                                tspan.text(text.charAt(0));
+                            }
+                        }
+                        
+                        // 1️⃣ 폰트 크기 줄여서 시도 (더 작은 크기까지 허용)
+                        let box = updateAndMeasure();
+                        if ((box.width > rectWidth || box.height > rectHeight) && nameFontSize > 8) { // 10 -> 8로 변경
+                            nameFontSize -= 1;
+                            valueFontSize -= 1;
+                            if (nameFontSize < 12) { // 더 빨리 간격 조정
+                                valueSpan.attr("dy", "1.0em");
+                            }
+                            adjustFontSizeAndSpacing();
+                            return;
+                        }
+                        
+                        // 2️⃣ 높이 초과 시 숫자 숨김
+                        if (box.height > rectHeight) {
+                            valueSpan.style("display", "none");
+                            nameSpan.attr("dy", "0.35em");
+                            box = updateAndMeasure();
+
+                            // 숫자 숨기고도 높이가 안 들어가는 경우 더 작은 폰트 시도
+                            if (box.height > rectHeight && nameFontSize > 8) {
+                                nameFontSize = Math.max(8, nameFontSize - 2); // 최소 8px
+                                nameSpan.style("font-size", `${nameFontSize}px`);
+                                box = updateAndMeasure();
+                            }
+                            
+                            // 그래도 안 들어가면 말줄임
+                            if (box.height > rectHeight) {
+                                truncateText(nameSpan, name, rectWidth);
+                                return;
+                            }
+                        }
+                        
+                        // 3️⃣ 너비 기준 말줄임
+                        if (box.width > rectWidth) {
+                            truncateText(nameSpan, name, rectWidth);
+                            if (valueSpan.style("display") !== "none") {
+                                truncateText(valueSpan, value, rectWidth);
+                            }
+                        }
+                    }
+
+                    adjustFontSizeAndSpacing();
+                });
+        }
+
+        // 창 크기 변경 시 다시 그리기
+        window.addEventListener('resize', function() {
+            if (window.lastData) {
+                updateTreemap(window.lastData);
+            }
+        });
+        
+        // Android에 로딩 완료 알림
+        if (window.Android) {
+            window.Android.onWebViewReady();
+        }
+    </script>
+</body>
+</html>

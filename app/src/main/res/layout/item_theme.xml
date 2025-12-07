@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 고정된 그리드 셀 영역 (보이지 않는 컨테이너) -->
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="90dp"
+    android:layout_margin="4dp">
+
+    <!-- 등락률에 따라 상대적 크기가 조절되는 테마 박스 -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/theme_card"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="0dp"
+        app:strokeColor="#E8E8E8"
+        app:strokeWidth="1dp">
+        
+        <LinearLayout
+            android:id="@+id/theme_background"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:padding="8dp">
+
+            <TextView
+                android:id="@+id/tv_theme_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:layout_marginBottom="8dp"
+                android:text="테마명"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMinTextSize="10sp"
+                android:autoSizeMaxTextSize="13sp"
+                android:autoSizeStepGranularity="1sp" />
+
+            <TextView
+                android:id="@+id/tv_theme_percent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/white"
+                android:textSize="17sp"
+                android:textStyle="bold"
+                android:maxLines="1"
+                android:ellipsize="end"
+                android:textAlignment="center"
+                android:text="0.00%"
+                android:autoSizeTextType="uniform"
+                android:autoSizeMinTextSize="14sp"
+                android:autoSizeMaxTextSize="17sp"
+                android:autoSizeStepGranularity="1sp" />
+
+            <TextView
+                android:id="@+id/tv_theme_volume"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone" />
+        </LinearLayout>
+        
+        <!-- 백엔드 호환성을 위해 숨김 상태로 유지 -->
+        <LinearLayout
+            android:id="@+id/theme_front"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone" />
+            
+        <LinearLayout
+            android:id="@+id/theme_back"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="gone">
+            
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_theme_stocks"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:visibility="gone" />
+        </LinearLayout>
+        
+    </androidx.cardview.widget.CardView>
+</FrameLayout> 

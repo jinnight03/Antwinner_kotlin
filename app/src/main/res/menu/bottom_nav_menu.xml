@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/navigation_dashboard"
+        android:icon="@drawable/tab_dashboard_darkgray_24"
+        android:title="대시보드" />
+
+    <item
+        android:id="@+id/navigation_theme_detail"
+        android:icon="@drawable/tab_theme_darkgray_20"
+        android:title="테마상세" />
+
+    <item
+        android:id="@+id/navigation_theme_schedule"
+        android:icon="@drawable/tab_schedule_darkgray_20"
+        android:title="테마일정" />
+</menu> 

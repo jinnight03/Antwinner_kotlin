@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingStart="16dp"
+    android:paddingEnd="16dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp">
+
+    <!-- 테마 카테고리 (CardView + 이미지뷰 + 텍스트뷰 조합) -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/card_theme_category"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="16dp"
+        app:cardBackgroundColor="@color/background_light_gray"
+        app:cardElevation="0dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+        
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:paddingStart="8dp"
+            android:paddingEnd="12dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp">
+            
+            <ImageView
+                android:id="@+id/iv_theme_logo"
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_marginEnd="8dp"
+                android:contentDescription="테마 로고"
+                android:visibility="gone"
+                tools:visibility="visible"
+                tools:src="@drawable/ic_launcher_foreground"/>
+                
+            <TextView
+                android:id="@+id/tv_theme_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/text_primary"
+                tools:text="HLB"/>
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- 날짜 -->
+    <TextView
+        android:id="@+id/tv_schedule_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="12dp"
+        android:textColor="@color/text_secondary"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/card_theme_category"
+        tools:text="2024. 4. 24" />
+
+    <!-- 일정 제목 -->
+    <TextView
+        android:id="@+id/tv_schedule_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:maxLines="2"
+        android:ellipsize="end"
+        app:layout_constraintEnd_toStartOf="@+id/iv_arrow_right"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_schedule_date"
+        tools:text="FDA와 리보세라닙 허가 관련 미팅 진행" />
+
+    <!-- 수혜 예상 종목 -->
+    <TextView
+        android:id="@+id/tv_related_stocks_label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="수혜 예상 종목"
+        android:textColor="@color/text_secondary"
+        android:textSize="13sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_schedule_title" />
+
+    <TextView
+        android:id="@+id/tv_related_stocks"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:textColor="@color/text_primary"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_related_stocks_label"
+        app:layout_constraintStart_toEndOf="@id/tv_related_stocks_label"
+        app:layout_constraintEnd_toStartOf="@+id/iv_arrow_right"
+        tools:text="HLB • HLB테라퓨틱스" />
+
+    <!-- 구분선 -->
+     <View
+        android:id="@+id/divider"
+        android:layout_width="1dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"
+        android:background="@color/divider_color"
+        app:layout_constraintTop_toBottomOf="@id/tv_related_stocks_label"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"/>
+
+    <!-- 이슈 영향도 -->
+    <TextView
+        android:id="@+id/tv_impact_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="8dp"
+        android:text="이슈 영향도"
+        android:gravity="center_horizontal"
+        android:textColor="@color/text_secondary"
+        android:textSize="12sp"
+        app:layout_constraintEnd_toStartOf="@+id/divider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_related_stocks_label" />
+
+    <TextView
+        android:id="@+id/tv_impact_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:gravity="center_horizontal"
+        android:textColor="@color/black"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintEnd_toStartOf="@+id/divider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tv_impact_label"
+        tools:text="강함" />
+
+    <!-- 투자 의견 -->
+    <TextView
+        android:id="@+id/tv_opinion_label"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="16dp"
+        android:text="투자의견"
+        android:gravity="center_horizontal"
+        android:textColor="@color/text_secondary"
+        android:textSize="12sp"
+        app:layout_constraintStart_toEndOf="@id/divider"
+        app:layout_constraintEnd_toStartOf="@+id/iv_arrow_right"
+        app:layout_constraintTop_toTopOf="@id/tv_impact_label" />
+
+    <TextView
+        android:id="@+id/tv_opinion_value"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="16dp"
+        android:gravity="center_horizontal"
+        android:textColor="@color/red"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/divider"
+        app:layout_constraintEnd_toStartOf="@+id/iv_arrow_right"
+        app:layout_constraintTop_toBottomOf="@id/tv_opinion_label"
+        tools:text="매수" />
+
+    <!-- 오른쪽 화살표 -->
+    <ImageView
+        android:id="@+id/iv_arrow_right"
+        android:layout_width="24dp"
+        android:layout_height="24dp"
+        android:src="@drawable/ic_arrow_right"
+        app:tint="@color/icon_tint_light"
+        android:contentDescription="상세보기"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@id/tv_schedule_title"
+        app:layout_constraintBottom_toBottomOf="@id/tv_related_stocks" />
+
+</androidx.constraintlayout.widget.ConstraintLayout> 

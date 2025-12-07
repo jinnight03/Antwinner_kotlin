@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tvDate"
+    android:layout_width="90dp"
+    android:layout_height="56dp"
+    android:text="5월 30일"
+    android:textSize="14sp"
+    android:textColor="@color/text_primary"
+    android:gravity="center"
+    android:padding="8dp"
+    android:background="@color/white"
+    android:singleLine="true"
+    android:ellipsize="none" /> 

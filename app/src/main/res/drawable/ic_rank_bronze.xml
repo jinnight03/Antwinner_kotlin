@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    
+    <!-- 메달 리본 -->
+    <path
+        android:fillColor="#8D6E63"
+        android:pathData="M12,2L8,8L4,8C2.9,8 2,8.9 2,10L2,11C2,12.11 2.9,13 4,13L20,13C21.1,13 22,12.1 22,11L22,10C22,8.9 21.1,8 20,8L16,8L12,2Z" />
+    
+    <!-- 메달 원형 -->
+    <path
+        android:fillColor="#CD7F32"
+        android:pathData="M12,8m-10,0a10,10 0,1 1,20 0a10,10 0,1 1,-20 0" />
+    
+    <!-- 브론즈 그라데이션 효과 -->
+    <path
+        android:fillColor="#B87333"
+        android:pathData="M12,8m-8,0a8,8 0,1 1,16 0a8,8 0,1 1,-16 0" />
+    
+    <!-- B 글자 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M10.5,10V5H13.5C14.33,5 15,5.67 15,6.5C15,7.04 14.71,7.5 14.26,7.74C14.71,7.97 15,8.46 15,9C15,9.83 14.33,10.5 13.5,10.5H10.5V10ZM11.5,7H13.5C13.78,7 14,6.78 14,6.5C14,6.22 13.78,6 13.5,6H11.5V7ZM11.5,9.5H13.5C13.78,9.5 14,9.28 14,9C14,8.72 13.78,8.5 13.5,8.5H11.5V9.5Z" />
+</vector> 

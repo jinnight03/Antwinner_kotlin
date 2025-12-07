@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout 
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/swipe_refresh_layout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_all_themes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipToPadding="false"
+        android:padding="8dp"
+        tools:listitem="@layout/item_theme_grid"
+        tools:itemCount="12"
+        tools:spanCount="2"
+        tools:layoutManager="androidx.recyclerview.widget.GridLayoutManager" />
+
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout> 

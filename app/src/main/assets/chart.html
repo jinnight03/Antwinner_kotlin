@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Highcharts 라이브러리 - 최적화된 로딩 -->
+    <script src="https://code.highcharts.com/stock/highstock.js"></script>
+    <!-- 불필요한 모듈 제거하여 로딩 속도 개선 -->
+    
+    <style>
+        body, html {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: #FFFFFF;
+        }
+        #container {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            min-height: 300px;
+        }
+        #loading-message {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: rgba(255, 255, 255, 0.8);
+            z-index: 10;
+            font-size: 16px;
+        }
+        .highcharts-candlestick-series .highcharts-point-up {
+            fill: #FF0000;
+            stroke: #FF0000;
+        }
+        .highcharts-candlestick-series .highcharts-point-down {
+            fill: #0000FF;
+            stroke: #0000FF;
+        }
+        /* X축 레이블 여유 공간 확보 - 최소화 */
+        .highcharts-xaxis-labels text {
+            padding-top: 5px;
+        }
+        /* 볼륨 차트 공간 확보 - 최소화 */
+        .highcharts-yaxis-labels {
+            margin-bottom: 5px;
+        }
+        /* 차트 영역을 최대화하기 위한 스타일 */
+        .highcharts-container {
+            overflow: visible !important;
+        }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <div id="loading-message">차트 로딩 중...</div>
+
+    <script>
+        // 성능 최적화를 위한 전역 설정
+        Highcharts.setOptions({
+            chart: {
+                animation: false // 애니메이션 비활성화로 성능 향상
+            },
+            plotOptions: {
+                series: {
+                    animation: false, // 시리즈 애니메이션 비활성화
+                    turboThreshold: 0 // 대용량 데이터 처리 개선
+                }
+            }
+        });
+        
+        // 안드로이드에서 데이터를 전달받기 위한 인터페이스 함수 - 최적화
+        function loadChartData(stockData) {
+            try {
+                console.log("loadChartData 호출됨, 데이터 길이:", stockData.length);
+                document.getElementById('loading-message').style.display = 'none';
+                
+                let data;
+                try {
+                    data = JSON.parse(stockData);
+                    console.log("JSON 파싱 성공");
+                } catch (parseError) {
+                    console.error("JSON 파싱 오류:", parseError.message);
+                    if (window.Android) {
+                        window.Android.onError("JSON 파싱 오류: " + parseError.message);
+                    }
+                    document.getElementById('loading-message').textContent = "데이터 형식 오류";
+                    document.getElementById('loading-message').style.display = 'flex';
+                    return;
+                }
+                
+                // OHLC 데이터 검증
+                if (!data || !data.ohlc || !Array.isArray(data.ohlc) || data.ohlc.length === 0) {
+                    console.error("OHLC 데이터가 없거나 빈 배열입니다");
+                    document.getElementById('loading-message').textContent = "차트 데이터가 비어있습니다";
+                    document.getElementById('loading-message').style.display = 'flex';
+                    if (window.Android) {
+                        window.Android.onError("OHLC 데이터가 비어있습니다");
+                    }
+                    return;
+                }
+                
+                console.log("차트 렌더링 시작");
+                renderChart(data);
+            } catch(error) {
+                console.error("Error loading chart data:", error);
+                if (window.Android) {
+                    window.Android.onError("Error loading chart data: " + error.message);
+                }
+                document.getElementById('loading-message').textContent = "차트 로딩 오류";
+                document.getElementById('loading-message').style.display = 'flex';
+            }
+        }
+        
+        // 차트 렌더링 함수 - 성능 최적화
+        function renderChart(data) {
+            console.log("renderChart 호출됨");
+            console.log("데이터 타입:", typeof data);
+            
+            const ohlc = data.ohlc || [];
+            const volume = data.volume || [];
+            
+            console.log("OHLC 데이터 개수:", ohlc.length);
+            console.log("거래량 데이터 개수:", volume.length);
+            
+            if (ohlc.length === 0) {
+                console.error("OHLC 데이터가 비어있습니다!");
+                document.getElementById('loading-message').textContent = "차트 데이터가 비어있습니다";
+                document.getElementById('loading-message').style.display = 'flex';
+                return;
+            }
+            
+            // 한국식 색상 (상승=빨강, 하락=파랑)
+            Highcharts.setOptions({
+                colors: ['#FF0000', '#0000FF'],
+                lang: {
+                    thousandsSep: ',',
+                    rangeSelectorZoom: '',
+                    months: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+                    shortMonths: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
+                    weekdays: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일']
+                }
+            });
+            
+            // 디바이스 너비에 따른 설정 조정
+            const deviceWidth = window.innerWidth;
+            const deviceHeight = window.innerHeight;
+            const isMobile = deviceWidth < 600;
+            
+            // 화면 크기에 따른 최적 여백 계산 - 간소화
+            const optimalMargin = Math.max(8, Math.min(15, deviceWidth / 80));
+            const optimalSpacing = Math.max(3, Math.min(10, deviceWidth / 120));
+            
+            console.log("화면 정보:", deviceWidth, "x", deviceHeight);
+            console.log("계산된 여백:", optimalMargin, optimalSpacing);
+            
+            Highcharts.stockChart('container', {
+                chart: {
+                    backgroundColor: '#FFFFFF',
+                    style: {
+                        fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif'
+                    },
+                    // 마진 설정 (그래프가 더 많은 공간을 차지하도록)
+                    margin: [10, 5, optimalMargin, 5], // 최적화된 여백
+                    spacing: [5, 0, optimalSpacing, 0], // 최적화된 여백
+                    height: '90%', // 높이를 높여 더 넓은 영역 사용
+                    animation: false, // 애니메이션 비활성화
+                    events: {
+                        load: function() {
+                            console.log('차트 로드 완료');
+                            if (window.Android) {
+                                window.Android.onChartLoaded();
+                            }
+                        }
+                    }
+                },
+                // 스크롤바와 내비게이터 최적화
+                scrollbar: {
+                    enabled: false
+                },
+                navigator: {
+                    enabled: true,
+                    height: 25, // 높이 줄임
+                    margin: 10, // 여백 줄임
+                    xAxis: {
+                        labels: {
+                            y: 15, // 레이블 위치 조정
+                            style: {
+                                fontSize: '10px' // 폰트 사이즈 줄임
+                            },
+                            formatter: function() {
+                                const date = new Date(this.value);
+                                return (date.getMonth() + 1) + '.' + date.getDate();
+                            }
+                        }
+                    }
+                },
+                plotOptions: {
+                    candlestick: {
+                        color: '#0000FF',  // 하락봉 색상
+                        upColor: '#FF0000', // 상승봉 색상
+                        lineColor: '#0000FF', // 하락봉 선 색상
+                        upLineColor: '#FF0000', // 상승봉 선 색상
+                        lineWidth: 1,
+                        animation: false, // 애니메이션 비활성화
+                        states: {
+                            hover: {
+                                lineWidth: 2
+                            }
+                        }
+                    },
+                    column: {
+                        animation: false // 볼륨 차트 애니메이션 비활성화
+                    }
+                },
+                yAxis: [{
+                    labels: {
+                        align: 'right',
+                        x: -5,
+                        y: 5,
+                        style: {
+                            fontSize: isMobile ? '9px' : '10px'
+                        }
+                    },
+                    height: '70%', // 메인 차트 비율 확대
+                    lineWidth: 1,
+                    offset: 0,
+                    resize: {
+                        enabled: true
+                    }
+                }, {
+                    labels: {
+                        align: 'right',
+                        x: -5,
+                        y: 5,
+                        style: {
+                            fontSize: isMobile ? '9px' : '10px'
+                        }
+                    },
+                    top: '75%', // 시작 위치 조정
+                    height: '25%', // 볼륨 차트 비율 감소
+                    offset: 0,
+                    lineWidth: 1
+                }],
+                rangeSelector: {
+                    enabled: false // 네이티브 앱에서 기간 버튼 제공하므로 비활성화
+                },
+                exporting: {
+                    enabled: false
+                },
+                xAxis: {
+                    labels: {
+                        y: 20,
+                        style: {
+                            fontSize: isMobile ? '9px' : '10px'
+                        },
+                        formatter: function() {
+                            const date = new Date(this.value);
+                            return (date.getMonth() + 1) + '.' + date.getDate();
+                        }
+                    },
+                    minPadding: 0.005,
+                    maxPadding: 0.005
+                },
+                tooltip: {
+                    split: false,
+                    shared: true,
+                    useHTML: true,
+                    borderWidth: 0,
+                    shadow: false,
+                    padding: 8,
+                    style: {
+                        fontSize: '12px'
+                    },
+                    formatter: function() {
+                        const points = this.points;
+                        if (!points || points.length === 0) return '';
+                        
+                        const ohlcPoint = points.find(p => p.series.type === 'candlestick');
+                        const volumePoint = points.find(p => p.series.type === 'column');
+                        
+                        if (!ohlcPoint || !volumePoint) return '';
+                        
+                        const date = new Date(this.x);
+                        const formattedDate = `${date.getFullYear()}.${(date.getMonth() + 1).toString().padStart(2, '0')}.${date.getDate().toString().padStart(2, '0')}`;
+                        
+                        const change = ohlcPoint.point.close - ohlcPoint.point.open;
+                        const changePercent = ((change / ohlcPoint.point.open) * 100).toFixed(2);
+                        const changeDirection = change >= 0 ? '+' : '';
+                        const changeColor = change >= 0 ? '#FF0000' : '#0000FF';
+                        
+                        return `<span style="font-size: 10px">${formattedDate}</span><br/>
+                            <span style="color: #666">시가: </span><b>${ohlcPoint.point.open.toLocaleString()}</b><br/>
+                            <span style="color: #666">고가: </span><b>${ohlcPoint.point.high.toLocaleString()}</b><br/>
+                            <span style="color: #666">저가: </span><b>${ohlcPoint.point.low.toLocaleString()}</b><br/>
+                            <span style="color: #666">종가: </span><b>${ohlcPoint.point.close.toLocaleString()}</b><br/>
+                            <span style="color: #666">변동: </span><span style="color:${changeColor}"><b>${changeDirection}${changePercent}%</b></span><br/>
+                            <span style="color: #666">거래량: </span><b>${volumePoint.y.toLocaleString()}</b>`;
+                    }
+                },
+                series: [{
+                    type: 'candlestick',
+                    id: 'stock-candlestick',
+                    name: '주가',
+                    data: ohlc,
+                    upColor: '#FF0000',
+                    color: '#0000FF',
+                    lineColor: '#0000FF',
+                    upLineColor: '#FF0000',
+                    dataGrouping: {
+                        enabled: false
+                    },
+                    animation: false,
+                    tooltip: {
+                        valueDecimals: 0
+                    }
+                }, {
+                    type: 'column',
+                    id: 'stock-volume',
+                    name: '거래량',
+                    data: volume,
+                    yAxis: 1,
+                    animation: false,
+                    dataGrouping: {
+                        enabled: false
+                    }
+                }],
+                responsive: {
+                    rules: [{
+                        condition: {
+                            maxWidth: 500
+                        },
+                        chartOptions: {
+                            chart: {
+                                margin: [10, 5, 12, 5], // 좁은 화면에서 여백 최소화
+                                spacing: [5, 0, 6, 0] // 좁은 화면에서 여백 최소화
+                            },
+                            yAxis: [{
+                                height: '70%' // 메인 차트 비율 확대
+                            }, {
+                                top: '75%', // 시작 위치 조정
+                                height: '25%' // 볼륨 차트 비율 감소
+                            }],
+                            xAxis: {
+                                labels: {
+                                    y: 15, // 레이블 위치 조정
+                                    style: {
+                                        fontSize: '9px'
+                                    }
+                                }
+                            },
+                            navigator: {
+                                height: 20
+                            }
+                        }
+                    }]
+                }
+            });
+        }
+    </script>
+</body>
+</html> 

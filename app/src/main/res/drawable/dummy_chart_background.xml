@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- 배경 그리드 라인 -->
+    <item>
+        <shape>
+            <solid android:color="#F5F5F5" />
+            <stroke
+                android:width="1dp"
+                android:color="#E0E0E0"
+                android:dashWidth="4dp"
+                android:dashGap="4dp" />
+        </shape>
+    </item>
+    
+    <!-- 차트 라인 -->
+    <item
+        android:top="20dp"
+        android:bottom="30dp"
+        android:left="5dp"
+        android:right="5dp">
+        <shape>
+            <gradient
+                android:startColor="#2196F3"
+                android:endColor="#FF9800"
+                android:angle="45" />
+            <corners android:radius="4dp" />
+        </shape>
+    </item>
+    
+    <!-- 추세선 포인트들 -->
+    <item
+        android:top="40dp"
+        android:left="30dp"
+        android:width="10dp"
+        android:height="10dp">
+        <shape android:shape="oval">
+            <solid android:color="#4CAF50" />
+        </shape>
+    </item>
+    
+    <item
+        android:top="70dp"
+        android:left="90dp"
+        android:width="10dp"
+        android:height="10dp">
+        <shape android:shape="oval">
+            <solid android:color="#4CAF50" />
+        </shape>
+    </item>
+    
+    <item
+        android:top="60dp"
+        android:left="150dp"
+        android:width="10dp"
+        android:height="10dp">
+        <shape android:shape="oval">
+            <solid android:color="#4CAF50" />
+        </shape>
+    </item>
+    
+    <item
+        android:top="50dp"
+        android:left="210dp"
+        android:width="10dp"
+        android:height="10dp">
+        <shape android:shape="oval">
+            <solid android:color="#4CAF50" />
+        </shape>
+    </item>
+    
+    <item
+        android:top="30dp"
+        android:left="270dp"
+        android:width="10dp"
+        android:height="10dp">
+        <shape android:shape="oval">
+            <solid android:color="#4CAF50" />
+        </shape>
+    </item>
+</layer-list> 

@@ -1,0 +1,386 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white">
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingHorizontal="16dp"
+            android:paddingBottom="24dp">
+
+            <!-- 주식 이름 -->
+            <TextView
+                android:id="@+id/tv_stock_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="태영건설"
+                android:textColor="@android:color/black"
+                android:textSize="28sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <!-- 주가 정보 -->
+            <TextView
+                android:id="@+id/tv_stock_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:text="3,310원"
+                android:textColor="@android:color/black"
+                android:textSize="24sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/tv_stock_name" />
+
+            <!-- 상승률 -->
+            <TextView
+                android:id="@+id/tv_change_rate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="+15.13%"
+                android:textColor="#FF0000"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@id/tv_stock_price"
+                app:layout_constraintStart_toEndOf="@id/tv_stock_price"
+                app:layout_constraintTop_toTopOf="@id/tv_stock_price" />
+
+            <!-- 테마 칩 영역 (이미지 포함) -->
+            <LinearLayout
+                android:id="@+id/chip_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="horizontal"
+                app:layout_constraintTop_toBottomOf="@id/tv_stock_price">
+
+                <com.google.android.material.chip.Chip
+                    android:id="@+id/chip_category"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="반도체(인공지능)"
+                    android:textColor="@android:color/black"
+                    android:textSize="12sp"
+                    app:chipBackgroundColor="#F0F0F0"
+                    app:chipIcon="@drawable/ic_chip_semiconductor" />
+            </LinearLayout>
+
+            <!-- 구분선 (테마와 투자자 정보 사이) -->
+            <View
+                android:id="@+id/divider_theme_investor"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="16dp"
+                android:background="#EEEEEE"
+                app:layout_constraintTop_toBottomOf="@id/chip_container" />
+
+            <!-- 투자자 정보 (한 줄에 표시) -->
+            <TextView
+                android:id="@+id/tv_investor_summary"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="투자자 수 48,142명  평균 수익률 +14.52%"
+                android:textColor="#757575"
+                android:textSize="14sp"
+                app:layout_constraintTop_toBottomOf="@id/divider_theme_investor" />
+
+            <!-- 최근 상승 정보 섹션 -->
+            <LinearLayout
+                android:id="@+id/recent_rise_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:layout_marginHorizontal="16dp"
+                android:orientation="vertical"
+                android:background="@drawable/bg_recent_rise_card"
+                android:padding="20dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_investor_summary">
+
+                <!-- 최근 상승 헤더 (한 줄로 나란히) -->
+                <TextView
+                    android:id="@+id/tv_recent_rise_header"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="최근 상승 2일전 ▲ 15.7%"
+                    android:textColor="#333333"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginBottom="12dp" />
+
+                <!-- 상승 이유 설명 -->
+                <TextView
+                    android:id="@+id/tv_recent_rise_reason"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="트럼프대통령, 중국 제1의 국가별 상호관세 90일간 전격 유예 소식 부각으로 반도체 관련주 급등"
+                    android:textColor="#666666"
+                    android:textSize="14sp"
+                    android:lineSpacingExtra="4dp"
+                    android:layout_marginBottom="16dp" />
+
+                <!-- 상승 히스토리 보기 버튼 -->
+                <LinearLayout
+                    android:id="@+id/btn_rise_history"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    android:padding="8dp"
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:focusable="true">
+
+                    <TextView
+                        android:id="@+id/tv_rise_history_count"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="1"
+                        android:text="45개 상승 히스토리 보기"
+                        android:textColor="#888888"
+                        android:textSize="14sp"
+                        android:gravity="center" />
+
+                    <ImageView
+                        android:layout_width="16dp"
+                        android:layout_height="16dp"
+                        android:src="@drawable/ic_arrow_right"
+                        android:tint="#888888" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- 새로운 3개 탭 영역 -->
+            <com.google.android.material.tabs.TabLayout
+                android:id="@+id/main_tab_layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="24dp"
+                android:background="@color/white"
+                app:tabMode="fixed"
+                app:tabGravity="fill"
+                app:tabIndicatorColor="@color/black"
+                app:tabSelectedTextColor="@color/black"
+                app:tabTextColor="#888888"
+                app:tabTextAppearance="@style/TabTextStyle"
+                app:layout_constraintTop_toBottomOf="@id/recent_rise_container">
+                
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="차트" />
+                    
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="왜 올랐을까?" />
+                    
+                <com.google.android.material.tabs.TabItem
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="종목정보" />
+            </com.google.android.material.tabs.TabLayout>
+
+            <!-- 메인 탭 컨텐츠를 위한 ViewPager -->
+            <androidx.viewpager2.widget.ViewPager2
+                android:id="@+id/main_view_pager"
+                android:layout_width="match_parent"
+                android:layout_height="500dp"
+                app:layout_constraintTop_toBottomOf="@id/main_tab_layout"
+                app:layout_constraintBottom_toBottomOf="parent" />
+
+            <!-- 테마 목록 ChipGroup (숨김 처리) -->
+            <com.google.android.material.chip.ChipGroup
+                android:id="@+id/chip_group_themes"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                app:chipSpacingHorizontal="8dp"
+                app:layout_constraintTop_toBottomOf="@id/tv_investor_summary"
+                app:singleLine="false"
+                android:visibility="gone" />
+
+            <!-- 숨겨진 정보 섹션 (필요시 사용) -->
+            <LinearLayout
+                android:id="@+id/info_container"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:orientation="vertical"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/chip_group_themes">
+
+                <!-- 업종 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:text="업종"
+                        android:textColor="#757575"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_industry"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="토목 건설업"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <!-- 주요제품 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:text="주요제품"
+                        android:textColor="#757575"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_products"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="종합건설업(토목공사,도로공사,건축공사,관급공사,환경공사,상하수도공사,하수종말처리공사)/부동산 임대,매매"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <!-- 투자자 수 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:text="투자자 수"
+                        android:textColor="#757575"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_investors"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="1,579명"
+                        android:textColor="@android:color/black"
+                        android:textSize="16sp" />
+                </LinearLayout>
+
+                <!-- 평균 수익률 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:padding="8dp">
+
+                    <TextView
+                        android:layout_width="80dp"
+                        android:layout_height="wrap_content"
+                        android:text="평균 수익률"
+                        android:textColor="#757575"
+                        android:textSize="16sp" />
+
+                    <TextView
+                        android:id="@+id/tv_avg_return"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="-64.44%"
+                        android:textColor="#0000FF"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <!-- 크게 상승한 날 섹션 (숨김 처리) -->
+            <TextView
+                android:id="@+id/tv_big_rise_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="크게 상승한 날"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/main_view_pager" />
+
+            <TextView
+                android:id="@+id/tv_big_rise_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:text="총 12회"
+                android:textColor="#888888"
+                android:textSize="16sp"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/tv_big_rise_title"
+                app:layout_constraintStart_toEndOf="@id/tv_big_rise_title"
+                app:layout_constraintTop_toTopOf="@id/tv_big_rise_title" />
+
+            <ImageButton
+                android:id="@+id/btn_info"
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:background="?attr/selectableItemBackgroundBorderless"
+                android:contentDescription="정보"
+                android:src="@drawable/ic_question_mark"
+                android:visibility="gone"
+                app:layout_constraintBottom_toBottomOf="@id/tv_big_rise_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_big_rise_title" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rv_big_rise_days"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:nestedScrollingEnabled="false"
+                android:visibility="gone"
+                app:layout_constraintTop_toBottomOf="@id/tv_big_rise_title" />
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btn_show_more"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:text="더보기"
+                android:textSize="14sp"
+                android:textColor="#666666"
+                android:visibility="gone"
+                app:backgroundTint="#F2F2F2"
+                app:cornerRadius="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/rv_big_rise_days"
+                style="@style/Widget.MaterialComponents.Button.TextButton" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout> 

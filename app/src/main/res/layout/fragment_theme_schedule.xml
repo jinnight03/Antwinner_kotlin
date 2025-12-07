@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    android:fitsSystemWindows="true"
+    tools:context=".ui.themeschedule.ThemeScheduleFragment">
+
+    <!-- 상단 탭 레이아웃 -->
+    <com.google.android.material.tabs.TabLayout
+        android:id="@+id/tab_layout_schedule_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:background="@android:color/transparent"
+        app:tabGravity="fill"
+        app:tabMode="fixed"
+        app:tabIndicatorColor="@color/colorPrimary"
+        app:tabIndicatorHeight="3dp"
+        app:tabTextAppearance="@style/ThemeScheduleTabTextAppearance"
+        app:tabTextColor="@color/tab_text_color_selector"
+        app:tabRippleColor="@color/colorPrimary"
+        app:tabIndicatorFullWidth="false"
+        app:tabIndicatorGravity="bottom"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="이슈일정" />
+
+        <com.google.android.material.tabs.TabItem
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="청약일정" />
+
+    </com.google.android.material.tabs.TabLayout>
+
+    <!-- ViewPager2 추가 -->
+    <androidx.viewpager2.widget.ViewPager2
+        android:id="@+id/view_pager_schedule"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:overScrollMode="never"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tab_layout_schedule_type" />
+
+    <!-- 기존 RecyclerView는 숨김 처리 (ViewPager로 대체) -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rv_theme_schedule"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginTop="8dp"
+        android:clipToPadding="false"
+        android:paddingBottom="16dp"
+        android:visibility="gone"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tab_layout_schedule_type"
+        tools:listitem="@layout/item_theme_schedule" />
+
+    <!-- 로딩 인디케이터 (옵션) -->
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        style="?android:attr/progressBarStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tab_layout_schedule_type"
+        tools:visibility="visible"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout> 

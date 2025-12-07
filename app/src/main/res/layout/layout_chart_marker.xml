@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:padding="12dp"
+    android:orientation="vertical"
+    android:background="@drawable/bg_chart_marker">
+
+    <TextView
+        android:id="@+id/tv_marker_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:text="2023-01-01"
+        android:textSize="12sp"
+        android:textColor="@android:color/white"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/tv_marker_ohlc"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="시: 50,000 고: 51,000\n저: 49,000 종: 50,500"
+        android:textSize="11sp"
+        android:textColor="@android:color/white" />
+
+    <TextView
+        android:id="@+id/tv_marker_volume"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:text="거래량: 1.2M"
+        android:textSize="11sp"
+        android:textColor="@android:color/white" />
+
+</LinearLayout> 

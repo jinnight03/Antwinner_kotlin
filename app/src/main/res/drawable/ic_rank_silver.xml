@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="24dp"
+    android:height="24dp"
+    android:viewportWidth="24"
+    android:viewportHeight="24">
+    
+    <!-- 메달 리본 -->
+    <path
+        android:fillColor="#9E9E9E"
+        android:pathData="M12,2L8,8L4,8C2.9,8 2,8.9 2,10L2,11C2,12.11 2.9,13 4,13L20,13C21.1,13 22,12.1 22,11L22,10C22,8.9 21.1,8 20,8L16,8L12,2Z" />
+    
+    <!-- 메달 원형 -->
+    <path
+        android:fillColor="#C0C0C0"
+        android:pathData="M12,8m-10,0a10,10 0,1 1,20 0a10,10 0,1 1,-20 0" />
+    
+    <!-- 실버 그라데이션 효과 -->
+    <path
+        android:fillColor="#B0B0B0"
+        android:pathData="M12,8m-8,0a8,8 0,1 1,16 0a8,8 0,1 1,-16 0" />
+    
+    <!-- S 글자 -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M13.5,10C13.5,10.83 12.83,11.5 12,11.5C11.17,11.5 10.5,10.83 10.5,10C10.5,9.17 11.17,8.5 12,8.5H12.5V7.5H11.5C10.67,7.5 10,6.83 10,6C10,5.17 10.67,4.5 11.5,4.5H12.5C13.33,4.5 14,5.17 14,6H13C13,5.73 12.78,5.5 12.5,5.5H11.5C11.22,5.5 11,5.73 11,6C11,6.28 11.22,6.5 11.5,6.5H12.5C13.33,6.5 14,7.17 14,8C14,8.83 13.33,9.5 12.5,9.5H12C11.72,9.5 11.5,9.73 11.5,10C11.5,10.28 11.72,10.5 12,10.5C12.28,10.5 12.5,10.28 12.5,10H13.5Z" />
+</vector> 

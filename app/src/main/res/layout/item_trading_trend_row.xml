@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:paddingVertical="10dp"
+    android:background="?android:attr/selectableItemBackground">
+
+    <!-- 날짜 -->
+    <TextView
+        android:id="@+id/tvDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1.2"
+        android:text="5월 30일"
+        android:textSize="14sp"
+        android:textColor="@color/text_primary"
+        android:gravity="center"
+        android:padding="8dp"
+        android:singleLine="true" />
+
+    <!-- 첫 번째 투자자 데이터 -->
+    <TextView
+        android:id="@+id/tvInvestor1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="+185억"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:padding="8dp"
+        android:layout_margin="3dp"
+        android:background="@drawable/bg_positive_value"
+        android:textColor="@color/red"
+        android:singleLine="true" />
+
+    <!-- 두 번째 투자자 데이터 -->
+    <TextView
+        android:id="@+id/tvInvestor2"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="+29억"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:padding="8dp"
+        android:layout_margin="3dp"
+        android:background="@drawable/bg_positive_value"
+        android:textColor="@color/red"
+        android:singleLine="true" />
+
+    <!-- 세 번째 투자자 데이터 -->
+    <TextView
+        android:id="@+id/tvInvestor3"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="-780억"
+        android:textSize="13sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:padding="8dp"
+        android:layout_margin="3dp"
+        android:background="@drawable/bg_negative_value"
+        android:textColor="@color/primary_blue"
+        android:singleLine="true" />
+
+</LinearLayout> 
